@@ -13,8 +13,11 @@ function Game() {
 
   const next = historyId % 2 === 0 ? 'X' : 'O';
   const list = history[historyId];
+  let isWinnerSet = false;
 
   function updateGameState(cellId) {
+    if (isWinnerSet) return;
+    
     const newEntry = list.map((val, i) => {
       if (i === cellId) return next;
       return val;
@@ -44,6 +47,7 @@ function Game() {
         && (list[a-1] !== 0)
       ) {
         que = `Winner: ${list[a-1]}`;
+        isWinnerSet = true;
         break;
       }
     };
